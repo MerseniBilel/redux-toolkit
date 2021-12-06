@@ -14,6 +14,9 @@ function App() {
   // all the reservations from the global state
   const reservation = useSelector((state : RootState) => state.reservation.value);
 
+  // all the customers from the global state
+  const customers = useSelector((state: RootState) => state.customer.value);
+
   const dispatch = useDispatch();
 
   // handler reservation and call the state to insert the name inside the state
@@ -33,8 +36,8 @@ function App() {
           <div>
             <h5 className="reservation-header">Reservations</h5>
             <div className="reservation-cards-container">
-              {reservation.map(name => {
-                return <ReservationCard name={name}/>
+              {reservation.map((name, index) => {
+                return <ReservationCard key={index} name={name} index={index}/>
               })}
             </div>
           </div>
@@ -44,7 +47,10 @@ function App() {
           </div>
         </div>
         <div className="customer-food-container">
-              <CustomerCard name="Bilel Merseni"/>
+              {customers.map((cust, index) => {
+                return <CustomerCard key={index} customerName={cust.customerName} orderLisr={cust.orderLisr} />
+              })}
+             
         </div>
       </div>
     </div>
